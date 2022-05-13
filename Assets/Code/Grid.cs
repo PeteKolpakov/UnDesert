@@ -6,11 +6,13 @@ public class Grid : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject _cubePrefab = null;
+    private GameObject _cubePrefab;
     [SerializeField]
     private int _width;
     [SerializeField]
     private int _height;
+    [SerializeField]
+    private GameObject _gridContainer;
 
     private Dictionary<Vector2Int, GameObject> _worldMap;
     private void Awake()
@@ -26,7 +28,7 @@ public class Grid : MonoBehaviour
             for (int y = 0; y < _height; y++)
             {
                 pos = new Vector3(x, 0, y);
-                GameObject cube = Instantiate(prefab, pos, Quaternion.identity);
+                GameObject cube = Instantiate(prefab, pos, Quaternion.identity, _gridContainer.transform);
                 //print(cube.GetComponent<GroundTile>());
                 //_worldMap.Add(new Vector2Int(x, y), cube);
                 //spawnedCube.SetName($"{x}, {y}");

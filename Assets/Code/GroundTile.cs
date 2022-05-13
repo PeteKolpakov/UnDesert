@@ -11,6 +11,8 @@ public class GroundTile : MonoBehaviour
 
     [SerializeField]
     private Renderer _renderer;
+    [SerializeField]
+    private Gradient _moistureGradient;
 
     public string GetName()
     {
@@ -29,9 +31,8 @@ public class GroundTile : MonoBehaviour
 
     private void Awake()
     {
-        //LifeCycle();
         timeLeft = _lifeTime += Random.Range(1f, 3f);
-        _renderer.material.color = Random.ColorHSV();
+        _renderer.material.color = _moistureGradient.Evaluate(1f);
     }
     private void Update()
     {
@@ -42,10 +43,11 @@ public class GroundTile : MonoBehaviour
     {
     
         timeLeft -= Time.deltaTime;
-        _renderer.material.color += Color.white * Time.deltaTime * Random.Range(0.01f, 0.1f);
-        if (timeLeft < 0)
+        float samplePoint = 0f + timeLeft;
+        _renderer.material.color = _moistureGradient.Evaluate(samplePoint);
+        if (timeLeft < 0f)
         {
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         }
     }
 }
