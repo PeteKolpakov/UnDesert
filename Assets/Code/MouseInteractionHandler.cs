@@ -15,14 +15,14 @@ public class MouseInteractionHandler : MonoBehaviour
             if (hit)
             {
                 Debug.Log("Hit " + hitInfo.transform.gameObject.name);
-                if (hitInfo.transform.gameObject.TryGetComponent<CubeBehaviour>(out CubeBehaviour target))
+                if (hitInfo.transform.gameObject.TryGetComponent<GroundTile>(out GroundTile target))
                 {
                     Debug.Log($"It's working! touched {target}");
                     Destroy(target.gameObject);
                 }
                 else
                 {
-                    Debug.Log("nopz");
+                    Debug.Log("nope");
                 }
             }
             else
