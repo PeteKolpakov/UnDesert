@@ -77,6 +77,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
+  _selectHeight: 0.2
 --- !u!33 &4127479567803207352
 MeshFilter:
   m_ObjectHideFlags: 0

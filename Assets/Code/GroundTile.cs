@@ -13,6 +13,8 @@ public class GroundTile : MonoBehaviour
     private Renderer _renderer;
     [SerializeField]
     private Gradient _moistureGradient;
+    [SerializeField]
+    private float _selectHeight;
 
     public string GetName()
     {
@@ -49,5 +51,14 @@ public class GroundTile : MonoBehaviour
         {
             //Destroy(this.gameObject);
         }
+    }
+
+    private void OnMouseEnter()
+    {
+        transform.position += new Vector3(0, _selectHeight, 0);
+    }
+    private void OnMouseExit()
+    {
+        transform.position -= new Vector3(0, _selectHeight, 0);
     }
 }
