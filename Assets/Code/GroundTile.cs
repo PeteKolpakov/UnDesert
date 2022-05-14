@@ -27,13 +27,13 @@ public class GroundTile : MonoBehaviour
 
     private List<GroundTile> _myNeighbors;
 
+    private TileState _myState = TileState.Soil;
+    public float _hydration = 1f;
+
     [SerializeField]
     private GameObject _canvas;
     [SerializeField]
     private Text _info;
-
-    private TileState _myState = TileState.Soil;
-    public float _hydration = 1f;
 
     public string GetName()
     {
@@ -71,8 +71,6 @@ public class GroundTile : MonoBehaviour
         _generatedPos = transform.position; 
         _selectedPos = new Vector3(_generatedPos.x, _generatedPos.y + _selectHeight ,_generatedPos.z);
         _myNeighbors = new List<GroundTile>();
-
-        //_info = FindObjectOfType<TileInfo>();
 
     }
 
