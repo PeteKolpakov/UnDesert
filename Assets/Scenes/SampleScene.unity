@@ -166,12 +166,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cubePrefab: {fileID: 4332583513302491228, guid: 8013f04e5d5788e44baed98569c1a383, type: 3}
-  _width: 11
-  _height: 11
+  _width: 21
+  _height: 21
   _gridContainer: {fileID: 1764723039}
   _heightScale: 0
   _groundHeightOffset: -6
-  _noiseBias: 0.89
+  _noiseBias: 0.24
 --- !u!4 &697405647
 Transform:
   m_ObjectHideFlags: 0
@@ -378,7 +378,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 14.76
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -402,7 +402,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.27781588, y: 0.36497167, z: -0.1150751, w: 0.8811196}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 837588707}

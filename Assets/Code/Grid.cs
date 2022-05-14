@@ -97,13 +97,40 @@ public class Grid : MonoBehaviour
                     float mod = 1 - distanceToCenter / maxDist;
 
                     float noiseSample = GetNoiseSample(x, y);
-                    spawnedCube.SetHidration(((noiseSample + _noiseBias) * .6f) * mod);
+                    if (noiseSample < 0.2f)
+                    {
+                        spawnedCube.SetHidration(((noiseSample + _noiseBias) * .6f * mod) + .15f);
+                    }
+                    else
+                    {
+                        spawnedCube.SetHidration((noiseSample + _noiseBias) * .6f * mod);
+                    }
+
+
 
                     //print((float)_noise2.Evaluate(x, y));
                     //print($"generated Ground at: {spawnedCube.GetName()}");
                 }
             }
         }
+
+        //for (int i = 0; i < _width; i++)
+        //{
+        //    GroundTile target;
+        //    _worldMap.TryGetValue(new Vector2Int(0, i), out target);
+        //    target.SetState(TileState.desert);
+        //    _worldMap.TryGetValue(new Vector2Int(_height, i), out target);
+        //    target.SetState(TileState.desert);
+        //}
+        //for (int i = 0; i < _height; i++)
+        //{
+        //    GroundTile target;
+        //    _worldMap.TryGetValue(new Vector2Int(0, i), out target);
+        //    target.SetState(TileState.desert);
+        //    _worldMap.TryGetValue(new Vector2Int(_width, i), out target);
+        //    target.SetState(TileState.desert);
+        //}
+
         GroundTile centerTile;
         _worldMap.TryGetValue(new Vector2Int(_width / 2, _height / 2), out centerTile);
         centerTile.SetHidration(1f);

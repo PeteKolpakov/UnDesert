@@ -52,23 +52,23 @@ MonoBehaviour:
     serializedVersion: 2
     key0: {r: 1, g: 0.98828465, b: 0.5518868, a: 1}
     key1: {r: 0.7924528, g: 0.4813328, b: 0.22801706, a: 1}
-    key2: {r: 0.5248739, g: 0.8962264, b: 0.2240566, a: 0}
+    key2: {r: 0.5248739, g: 0.8962264, b: 0.2240566, a: 1}
     key3: {r: 0.32705233, g: 0.6132076, b: 0.25164652, a: 0}
-    key4: {r: 0.25101078, g: 0.8301887, b: 0.09789959, a: 0}
+    key4: {r: 0.32705233, g: 0.6132076, b: 0.25164652, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 6246
-    ctime1: 9952
-    ctime2: 42878
+    ctime0: 11222
+    ctime1: 15987
+    ctime2: 44466
     ctime3: 65535
     ctime4: 65535
     ctime5: 0
     ctime6: 0
     ctime7: 0
     atime0: 0
-    atime1: 65535
-    atime2: 0
+    atime1: 48066
+    atime2: 65535
     atime3: 0
     atime4: 0
     atime5: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
     atime7: 0
     m_Mode: 0
     m_NumColorKeys: 4
-    m_NumAlphaKeys: 2
+    m_NumAlphaKeys: 3
   _selectHeight: 0.2
   _desertCutoff: 0.2
 --- !u!33 &4127479567803207352

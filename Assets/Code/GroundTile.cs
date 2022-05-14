@@ -48,9 +48,9 @@ public class GroundTile : MonoBehaviour
             CheckIfDry();
             UpdateTileState();
         }
-        //ResolveNeighbourInteraction();
-        //UpdateHydration();
-        //UpdateHidrationColor();
+        ResolveNeighbourInteraction();
+        UpdateHydration();
+        UpdateHidrationColor();
     }
     public string GetName()
     {
@@ -73,6 +73,7 @@ public class GroundTile : MonoBehaviour
         if (_iAmType.Equals(TileState.desert))
         {
             _renderer.material.color = _moistureGradient.Evaluate(0);
+            return;
         }
         _renderer.material.color = _moistureGradient.Evaluate(_hydration);
     }
@@ -90,28 +91,38 @@ public class GroundTile : MonoBehaviour
     }
     private void ResolveNeighbourInteraction()
     {
-        int desetCount = 0;
+        int desertCount = 0;
         int waterCount = 0;
         foreach (var tile in _myNeighbors)
         {
             if (tile.GetState() == TileState.desert)
             {
-                desetCount++;
+                desertCount++;
             }
             else if (tile.GetState() == TileState.water)
             {
                 waterCount++;
             }            
         }
-        if (desetCount >= 2 && _iAmType.Equals(TileState.soil))
+        // if soil
+        if (desertCount >= 2 && _iAmType.Equals(TileState.soil))
         {
             _hydtationState = HydrationState.down;
             //_renderer.material.color = Color.black;
         }
+        // if desert
         else if (waterCount >= 1 && !_iAmType.Equals(TileState.water))
         {
-            _hydtationState = HydrationState.up;
-            //_renderer.material.color = Color.blue;
+            if (!(desertCount >= 2))
+            {
+                _hydtationState = HydrationState.up;
+                //_renderer.material.color = Color.blue;
+            }
+        }
+        // if water
+        else if (desertCount >= 3 && _iAmType.Equals(TileState.water))
+        {
+            _hydtationState = HydrationState.down;
         }
         else
         {
