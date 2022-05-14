@@ -30,10 +30,7 @@ public class GroundTile : MonoBehaviour
     private TileState _myState = TileState.Soil;
     public float _hydration = 1f;
 
-    [SerializeField]
-    private GameObject _canvas;
-    [SerializeField]
-    private Text _info;
+    private HydrationInfo _moistInfo;
 
     public string GetName()
     {
@@ -72,6 +69,13 @@ public class GroundTile : MonoBehaviour
         _selectedPos = new Vector3(_generatedPos.x, _generatedPos.y + _selectHeight ,_generatedPos.z);
         _myNeighbors = new List<GroundTile>();
 
+        _moistInfo = FindObjectOfType<HydrationInfo>();
+
+    }
+
+    private void Start()
+    {
+        _moistInfo.gameObject.SetActive(false);
     }
 
     public void SetNeighbors(List<GroundTile> targetList)
@@ -145,8 +149,8 @@ public class GroundTile : MonoBehaviour
         _isSelected = true;
         _isHovered = true;
 
-        _info.text = $"{ _hydration * 100:F0}%";
-        _canvas.SetActive(true);
+        _moistInfo.SetValue(_hydration);
+        _moistInfo.ShowUI(true);
 
     }
     private void OnMouseExit()
@@ -154,7 +158,8 @@ public class GroundTile : MonoBehaviour
         _isSelected = false;
         _isHovered = false;
 
-        _canvas.SetActive(false);
+        _moistInfo.ShowUI(false);
+
     }
     private void OnMouseDown()
     {
