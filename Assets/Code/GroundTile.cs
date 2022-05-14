@@ -1,4 +1,4 @@
-using System.Collections;
+using Assets.Code;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,6 +24,9 @@ public class GroundTile : MonoBehaviour
 
     private List<GroundTile> _myNeighbors;
 
+    private TileState _myState = TileState.soil;
+    private float _hydration = 1f;
+
     public string GetName()
     {
         return _name;
@@ -37,6 +40,16 @@ public class GroundTile : MonoBehaviour
     public void SetLifeTime(float target)
     {
         timeLeft = target;
+    }
+
+    public void SetHidration(float target)
+    {
+        _hydration = target;
+    }
+
+    public void UpdateHidrationColor()
+    {
+        _renderer.material.color = _moistureGradient.Evaluate(_hydration);
     }
 
     private void Awake()
@@ -64,8 +77,9 @@ public class GroundTile : MonoBehaviour
 
     private void Update()
     {
-        CountdownTimer();   
+        //CountdownTimer();   
         UpdateSelectedState();
+        UpdateHidrationColor();
     }
 
     private void UpdateSelectedState()
@@ -79,9 +93,7 @@ public class GroundTile : MonoBehaviour
             transform.position = _selectedPos;
         }
     }
-    /// <summary>
-    /// returns True when timer when timer runs out
-    /// </summary>
+
     private void CountdownTimer()
     {   
         timeLeft -= Time.deltaTime;
@@ -106,6 +118,7 @@ public class GroundTile : MonoBehaviour
     private void OnMouseDown()
     {
         _isSelected = false;
+        Debug.Log($"hidration level at {_name} is {_hydration}");
 
     }
     private void OnMouseUp()

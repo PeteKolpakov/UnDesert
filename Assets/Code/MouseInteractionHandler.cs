@@ -8,28 +8,28 @@ public class MouseInteractionHandler : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Mouse is down");
+            //Debug.Log("Mouse is down");
 
             RaycastHit hitInfo = new RaycastHit();
             bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
             if (hit)
             {
-                Debug.Log("Hit " + hitInfo.transform.gameObject.name);
+                //Debug.Log("Hit " + hitInfo.transform.gameObject.name);
                 if (hitInfo.transform.gameObject.TryGetComponent<GroundTile>(out GroundTile target))
                 {
-                    Debug.Log($"It's working! touched {target}");
+                    //Debug.Log($"It's working! {target}");
                     //Destroy(target.gameObject);
                 }
                 else
                 {
-                    Debug.Log("nope");
+                    //Debug.Log("nope");
                 }
             }
             else
             {
-                Debug.Log("No hit");
+                //Debug.Log("No hit");
             }
-            Debug.Log("Mouse is down");
+            //Debug.Log("Mouse is down");
         }
     }
 }
