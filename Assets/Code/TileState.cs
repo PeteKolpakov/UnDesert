@@ -9,6 +9,7 @@ namespace Assets.Code
     public enum TileState
     {
         desert,
-        soil
+        soil,
+        water
     }
 }

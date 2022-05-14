@@ -15,6 +15,8 @@ public class GroundTile : MonoBehaviour
     private Gradient _moistureGradient;
     [SerializeField]
     private float _selectHeight;
+    [SerializeField][Range(0f, 1f)]
+    private float _desertCutoff = 0.2f;
 
     private bool _isSelected = false;
     private bool _isHovered = false;
@@ -80,6 +82,11 @@ public class GroundTile : MonoBehaviour
         //CountdownTimer();   
         UpdateSelectedState();
         UpdateHidrationColor();
+        if (!_myState.Equals(TileState.water))
+        {
+            CheckIfDry();
+            UpdateTileState();
+        }
     }
 
     private void UpdateSelectedState()
@@ -91,6 +98,23 @@ public class GroundTile : MonoBehaviour
         if (_isSelected)
         {
             transform.position = _selectedPos;
+        }
+    }
+
+    private bool CheckIfDry()
+    {
+        return _hydration <= _desertCutoff;
+    }
+    private void UpdateTileState()
+    {
+        switch (CheckIfDry())
+        {
+            case true:
+                _myState = TileState.desert;
+                break;
+            case false:
+                _myState = TileState.soil;
+                break;
         }
     }
 
@@ -118,7 +142,7 @@ public class GroundTile : MonoBehaviour
     private void OnMouseDown()
     {
         _isSelected = false;
-        Debug.Log($"hidration level at {_name} is {_hydration}");
+        Debug.Log($"hidration level at {_name} is {_hydration} and state is {_myState}");
 
     }
     private void OnMouseUp()

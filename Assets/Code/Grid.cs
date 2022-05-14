@@ -78,19 +78,26 @@ public class Grid : MonoBehaviour
             {
                 //pos = new Vector3(x, -6 + (_noise.GetSampleAt(new Vector2(x,y)) * 5), y);
                 //pos = new Vector3(x, -6 + (float)(_noise2.Evaluate(x, y) * _heightScale), y);
+
                 pos = new Vector3(x, _groundHeightOffset, y);
                 //pos = new Vector3(x, _groundOffset, y);
+
                 GameObject cube = Instantiate(prefab, pos, Quaternion.identity, _gridContainer.transform);
                 _worldMap.Add(new Vector2Int(x, y), cube.GetComponent<GroundTile>());
                 GroundTile spawnedCube = null;
+
                 if (cube.TryGetComponent<GroundTile>(out GroundTile target))
                 {
                     spawnedCube = target;
                     spawnedCube.SetName($"{x}, {y}");
                     spawnedCube.SetLifeTime(Random.Range(1f, 5f));
-                    float distanceToCenter = Vector2.Distance(new Vector2(x,y), new Vector2(_width/2, _height/2));
+
+                    float distanceToCenter = Vector2.Distance(new Vector2(x, y), new Vector2(_width / 2, _height / 2));
                     float mod = 1 - distanceToCenter / maxDist;
-                    spawnedCube.SetHidration(((float)_noise2.Evaluate(x, y) * mod) + _noiseBias);
+
+                    float noiseSample = GetNoiseSample(x, y);
+                    spawnedCube.SetHidration((noiseSample * mod) + _noiseBias);
+
                     //print((float)_noise2.Evaluate(x, y));
                     //print($"generated Ground at: {spawnedCube.GetName()}");
                 }
@@ -99,6 +106,21 @@ public class Grid : MonoBehaviour
         GroundTile centerTile;
         _worldMap.TryGetValue(new Vector2Int(_width / 2, _height / 2), out centerTile);
         centerTile.SetHidration(1f);
+    }
+
+    private float GetNoiseSample(int x, int y)
+    {
+        float noiseSample = (float)_noise2.Evaluate(x, y);
+        if (noiseSample <= 0f)
+        {
+            noiseSample = 0f;
+        }
+        if (noiseSample >= 1.0f)
+        {
+            noiseSample = 1f;
+        }
+
+        return noiseSample;
     }
 
     public  GroundTile GetCubeAtCoords(Vector2Int target)
