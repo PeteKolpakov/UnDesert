@@ -17,6 +17,8 @@ public class GroundTile : MonoBehaviour
     private float _selectHeight;
     [SerializeField][Range(0f, 1f)]
     private float _desertCutoff = 0.2f;
+    [SerializeField][Range(0f, 1f)]
+    private float _hydrationSpeed = 0.01f;
 
     private bool _isSelected = false;
     private bool _isHovered = false;
@@ -174,11 +176,11 @@ public class GroundTile : MonoBehaviour
 
         if (_hydtationState.Equals(HydrationState.up))
         {
-            _hydration += .1f * Time.deltaTime;
+            _hydration += _hydrationSpeed * Time.deltaTime;
         }
         if (_hydtationState.Equals(HydrationState.down))
         {
-            _hydration -= .1f * Time.deltaTime;
+            _hydration -= _hydrationSpeed * Time.deltaTime;
         }
     }
 
