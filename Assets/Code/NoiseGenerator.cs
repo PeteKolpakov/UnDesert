@@ -29,7 +29,7 @@ public class NoiseGenerator  : MonoBehaviour
     public float GetSampleAt(Vector2 pos)
     {
             
-        float sample = Mathf.PerlinNoise(xOrg, yOrg);
+        float sample = Mathf.PerlinNoise(pos.x, pos.y);
         Debug.Log(sample);
         return sample;                
             

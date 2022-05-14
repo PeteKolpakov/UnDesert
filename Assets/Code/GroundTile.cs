@@ -16,6 +16,11 @@ public class GroundTile : MonoBehaviour
     [SerializeField]
     private float _selectHeight;
 
+    private bool _isSelected = false;
+
+    private Vector3 _generatedPos;
+    private Vector3 _selectedPos;
+
     public string GetName()
     {
         return _name;
@@ -35,10 +40,25 @@ public class GroundTile : MonoBehaviour
     {
         timeLeft = _lifeTime += Random.Range(1f, 3f);
         _renderer.material.color = _moistureGradient.Evaluate(1f);
+        _generatedPos = transform.position; 
+        _selectedPos = new Vector3(_generatedPos.x, _generatedPos.y + _selectHeight ,_generatedPos.z);
     }
     private void Update()
     {
-        LifeCycle();       
+        LifeCycle();   
+        UpdateSelectedState();
+    }
+
+    private void UpdateSelectedState()
+    {
+        if (!_isSelected)
+        {
+            transform.position = _generatedPos;
+        }
+        if (_isSelected)
+        {
+            transform.position = _selectedPos;
+        }
     }
 
     private void LifeCycle()
@@ -55,10 +75,12 @@ public class GroundTile : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        transform.position += new Vector3(0, _selectHeight, 0);
+        _isSelected = true;
     }
     private void OnMouseExit()
     {
-        transform.position -= new Vector3(0, _selectHeight, 0);
+        _isSelected = false;
     }
+    
+
 }

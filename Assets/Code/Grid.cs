@@ -1,10 +1,10 @@
+using NoiseTest;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(NoiseGenerator))]
 public class Grid : MonoBehaviour
 {
     [SerializeField]
@@ -17,14 +17,17 @@ public class Grid : MonoBehaviour
     private int _height;
     [SerializeField]
     private GameObject _gridContainer;
-    private NoiseGenerator _noise;
+    [SerializeField]
+    private float _heightScale = 4;
 
     private Dictionary<Vector2Int, GameObject> _worldMap;
+
+    private OpenSimplexNoise _noise2;
 
     private void Awake()
     {
         _worldMap = new Dictionary<Vector2Int, GameObject>();
-        _noise = GetComponent<NoiseGenerator>();
+        _noise2 = new OpenSimplexNoise();
     }
     private void Start()
     {
@@ -35,7 +38,8 @@ public class Grid : MonoBehaviour
             for (int y = 0; y < _height; y++)
             {
                 //pos = new Vector3(x, -6 + (_noise.GetSampleAt(new Vector2(x,y)) * 5), y);
-                pos = new Vector3(x, _groundOffset, y);
+                pos = new Vector3(x, -6 + (float)(_noise2.Evaluate(x,y) * _heightScale), y);
+                //pos = new Vector3(x, _groundOffset, y);
                 GameObject cube = Instantiate(prefab, pos, Quaternion.identity, _gridContainer.transform);
                 //print(cube.GetComponent<GroundTile>());
                 _worldMap.Add(new Vector2Int(x, y), cube);
