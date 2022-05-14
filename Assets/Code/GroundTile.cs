@@ -26,37 +26,10 @@ public class GroundTile : MonoBehaviour
 
     private List<GroundTile> _myNeighbors;
 
-    private TileState _myState = TileState.soil;
+    private TileState _iAmType = TileState.soil;
+
+    private HydrationState _hydtationState = HydrationState.stable;
     private float _hydration = 1f;
-
-    public string GetName()
-    {
-        return _name;
-    }
-
-    public void SetName(string target)
-    {
-        _name = target;
-    }
-
-    public void SetLifeTime(float target)
-    {
-        timeLeft = target;
-    }
-
-    public void SetHidration(float target)
-    {
-        _hydration = target;
-    }
-
-    public void UpdateHidrationColor()
-    {
-        if (_myState.Equals(TileState.desert))
-        {
-            _renderer.material.color = _moistureGradient.Evaluate(0);
-        }
-        _renderer.material.color = _moistureGradient.Evaluate(_hydration);
-    }
 
     private void Awake()
     {
@@ -66,7 +39,43 @@ public class GroundTile : MonoBehaviour
         _selectedPos = new Vector3(_generatedPos.x, _generatedPos.y + _selectHeight ,_generatedPos.z);
         _myNeighbors = new List<GroundTile>();
     }
-
+    private void Update()
+    {
+        //CountdownTimer();   
+        UpdateSelectedState();
+        if (!_iAmType.Equals(TileState.water))
+        {
+            CheckIfDry();
+            UpdateTileState();
+        }
+        //ResolveNeighbourInteraction();
+        //UpdateHydration();
+        //UpdateHidrationColor();
+    }
+    public string GetName()
+    {
+        return _name;
+    }
+    public void SetName(string target)
+    {
+        _name = target;
+    }
+    public void SetLifeTime(float target)
+    {
+        timeLeft = target;
+    }
+    public void SetHidration(float target)
+    {
+        _hydration = target;
+    }
+    public void UpdateHidrationColor()
+    {
+        if (_iAmType.Equals(TileState.desert))
+        {
+            _renderer.material.color = _moistureGradient.Evaluate(0);
+        }
+        _renderer.material.color = _moistureGradient.Evaluate(_hydration);
+    }
     public void SetNeighbors(List<GroundTile> targetList)
     {
         _myNeighbors.Clear();
@@ -75,24 +84,45 @@ public class GroundTile : MonoBehaviour
             _myNeighbors.Add(item);
         }
     }
-
     public List<GroundTile> GetNeighbors()
     {
         return _myNeighbors;
     }
-
-    private void Update()
+    private void ResolveNeighbourInteraction()
     {
-        //CountdownTimer();   
-        UpdateSelectedState();
-        UpdateHidrationColor();
-        if (!_myState.Equals(TileState.water))
+        int desetCount = 0;
+        int waterCount = 0;
+        foreach (var tile in _myNeighbors)
         {
-            CheckIfDry();
-            UpdateTileState();
+            if (tile.GetState() == TileState.desert)
+            {
+                desetCount++;
+            }
+            else if (tile.GetState() == TileState.water)
+            {
+                waterCount++;
+            }            
+        }
+        if (desetCount >= 2 && _iAmType.Equals(TileState.soil))
+        {
+            _hydtationState = HydrationState.down;
+            //_renderer.material.color = Color.black;
+        }
+        else if (waterCount >= 1 && !_iAmType.Equals(TileState.water))
+        {
+            _hydtationState = HydrationState.up;
+            //_renderer.material.color = Color.blue;
+        }
+        else
+        {
+            _hydtationState = HydrationState.stable;
+            //_renderer.material.color = Color.red;
         }
     }
-
+    private TileState GetState()
+    {
+        return _iAmType;
+    }
     private void UpdateSelectedState()
     {
         if (!_isSelected)
@@ -104,7 +134,6 @@ public class GroundTile : MonoBehaviour
             transform.position = _selectedPos;
         }
     }
-
     private bool CheckIfDry()
     {
         return _hydration <= _desertCutoff;
@@ -114,22 +143,31 @@ public class GroundTile : MonoBehaviour
         switch (CheckIfDry())
         {
             case true:
-                _myState = TileState.desert;
+                _iAmType = TileState.desert;
                 break;
             case false:
-                _myState = TileState.soil;
+                _iAmType = TileState.soil;
                 break;
         }
     }
-
-    private void CountdownTimer()
-    {   
-        timeLeft -= Time.deltaTime;
-        float samplePoint = 0f + timeLeft;
-        _renderer.material.color = _moistureGradient.Evaluate(samplePoint);
-        if (timeLeft < 0f)
+    internal void SetState(TileState target)
+    {
+        _iAmType = target;
+    }
+    private void UpdateHydration()
+    {
+        if (_hydtationState.Equals(HydrationState.stable))
         {
-            //Destroy(this.gameObject);
+            return;
+        }
+
+        if (_hydtationState.Equals(HydrationState.up))
+        {
+            _hydration += .1f * Time.deltaTime;
+        }
+        if (_hydtationState.Equals(HydrationState.down))
+        {
+            _hydration -= .1f * Time.deltaTime;
         }
     }
 
@@ -146,7 +184,7 @@ public class GroundTile : MonoBehaviour
     private void OnMouseDown()
     {
         _isSelected = false;
-        Debug.Log($"hidration level at {_name} is {_hydration} and state is {_myState}");
+        Debug.Log($"hidration level at {_name} is {_hydration} and state is {_iAmType}");
 
     }
     private void OnMouseUp()

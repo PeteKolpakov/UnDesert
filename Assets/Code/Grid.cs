@@ -1,3 +1,4 @@
+using Assets.Code;
 using NoiseTest;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
@@ -106,6 +107,7 @@ public class Grid : MonoBehaviour
         GroundTile centerTile;
         _worldMap.TryGetValue(new Vector2Int(_width / 2, _height / 2), out centerTile);
         centerTile.SetHidration(1f);
+        centerTile.SetState(TileState.water);
     }
 
     private float GetNoiseSample(int x, int y)
