@@ -17,9 +17,12 @@ public class GroundTile : MonoBehaviour
     private float _selectHeight;
 
     private bool _isSelected = false;
+    private bool _isHovered = false;
 
     private Vector3 _generatedPos;
     private Vector3 _selectedPos;
+
+    private List<GroundTile> _myNeighbors;
 
     public string GetName()
     {
@@ -76,11 +79,25 @@ public class GroundTile : MonoBehaviour
     private void OnMouseEnter()
     {
         _isSelected = true;
+        _isHovered = true;
     }
     private void OnMouseExit()
     {
         _isSelected = false;
+        _isHovered = false;
     }
-    
+    private void OnMouseDown()
+    {
+        _isSelected = false;
+
+    }
+    private void OnMouseUp()
+    {
+        if (_isHovered)
+        {
+            _isSelected = true;
+        }
+    }
+
 
 }

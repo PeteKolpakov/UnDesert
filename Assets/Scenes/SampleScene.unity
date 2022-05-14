@@ -166,10 +166,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 959f6db3d02e6574aa7c6c8207228257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _groundOffset: -6
   _cubePrefab: {fileID: 4332583513302491228, guid: 8013f04e5d5788e44baed98569c1a383, type: 3}
   _width: 10
   _height: 10
   _gridContainer: {fileID: 1764723039}
+  _heightScale: 0
 --- !u!4 &697405647
 Transform:
   m_ObjectHideFlags: 0
