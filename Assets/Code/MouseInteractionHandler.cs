@@ -18,7 +18,7 @@ public class MouseInteractionHandler : MonoBehaviour
                 if (hitInfo.transform.gameObject.TryGetComponent<GroundTile>(out GroundTile target))
                 {
                     Debug.Log($"It's working! touched {target}");
-                    Destroy(target.gameObject);
+                    //Destroy(target.gameObject);
                 }
                 else
                 {
