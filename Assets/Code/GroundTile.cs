@@ -45,10 +45,26 @@ public class GroundTile : MonoBehaviour
         _renderer.material.color = _moistureGradient.Evaluate(1f);
         _generatedPos = transform.position; 
         _selectedPos = new Vector3(_generatedPos.x, _generatedPos.y + _selectHeight ,_generatedPos.z);
+        _myNeighbors = new List<GroundTile>();
     }
+
+    public void SetNeighbors(List<GroundTile> targetList)
+    {
+        _myNeighbors.Clear();
+        foreach (var item in targetList)
+        {
+            _myNeighbors.Add(item);
+        }
+    }
+
+    public List<GroundTile> GetNeighbors()
+    {
+        return _myNeighbors;
+    }
+
     private void Update()
     {
-        LifeCycle();   
+        CountdownTimer();   
         UpdateSelectedState();
     }
 
@@ -63,10 +79,11 @@ public class GroundTile : MonoBehaviour
             transform.position = _selectedPos;
         }
     }
-
-    private void LifeCycle()
-    {
-    
+    /// <summary>
+    /// returns True when timer when timer runs out
+    /// </summary>
+    private void CountdownTimer()
+    {   
         timeLeft -= Time.deltaTime;
         float samplePoint = 0f + timeLeft;
         _renderer.material.color = _moistureGradient.Evaluate(samplePoint);
@@ -98,6 +115,4 @@ public class GroundTile : MonoBehaviour
             _isSelected = true;
         }
     }
-
-
 }

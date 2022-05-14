@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 697405647}
   - component: {fileID: 697405646}
   - component: {fileID: 697405645}
-  - component: {fileID: 697405648}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -168,8 +167,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _groundOffset: -6
   _cubePrefab: {fileID: 4332583513302491228, guid: 8013f04e5d5788e44baed98569c1a383, type: 3}
-  _width: 10
-  _height: 10
+  _width: 11
+  _height: 11
   _gridContainer: {fileID: 1764723039}
   _heightScale: 0
 --- !u!4 &697405647
@@ -187,23 +186,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &697405648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 697405644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c639f13b464eed42acd1ba3c28ac587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pixWidth: 10
-  pixHeight: 10
-  xOrg: 3
-  yOrg: 3
-  scale: 1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
