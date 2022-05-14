@@ -159,7 +159,7 @@ public class Grid : MonoBehaviour
         {
             return value;
         }
-        print($"No Ground Tile at Target Lovation ({target})");
+        print($"No Ground Tile at Target Location ({target})");
         return null;       
     }
 }

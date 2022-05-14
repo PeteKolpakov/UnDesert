@@ -4,32 +4,33 @@ using UnityEngine;
 
 public class MouseInteractionHandler : MonoBehaviour
 {
+
+    private PlaceTree tree;
+
+    private void Start()
+    {
+        tree = FindObjectOfType<PlaceTree>();
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //Debug.Log("Mouse is down");
 
             RaycastHit hitInfo = new RaycastHit();
             bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
+
             if (hit)
             {
-                //Debug.Log("Hit " + hitInfo.transform.gameObject.name);
                 if (hitInfo.transform.gameObject.TryGetComponent<GroundTile>(out GroundTile target))
                 {
-                    //Debug.Log($"It's working! {target}");
-                    //Destroy(target.gameObject);
-                }
-                else
-                {
-                    //Debug.Log("nope");
+                    if (!tree.allTrees.Contains(new Vector2(target.transform.position.x, target.transform.position.z)))
+                    {
+                        tree.PlantTree(target.transform.position, target.transform, target._hydration);
+                    }
+                    else print("Tile Already Populated");
                 }
             }
-            else
-            {
-                //Debug.Log("No hit");
-            }
-            //Debug.Log("Mouse is down");
         }
     }
 }

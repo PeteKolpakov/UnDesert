@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4332583513302491228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.8932, z: 0}
-  m_LocalScale: {x: 0.92, y: 12.7864, z: 0.92}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -50,35 +50,38 @@ MonoBehaviour:
   _renderer: {fileID: 828374603975138131}
   _moistureGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 0.98828465, b: 0.5518868, a: 1}
-    key1: {r: 0.7924528, g: 0.4813328, b: 0.22801706, a: 1}
-    key2: {r: 0.5248739, g: 0.8962264, b: 0.2240566, a: 1}
-    key3: {r: 0.32705233, g: 0.6132076, b: 0.25164652, a: 0}
-    key4: {r: 0.32705233, g: 0.6132076, b: 0.25164652, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 11222
-    ctime1: 15987
-    ctime2: 44466
-    ctime3: 65535
-    ctime4: 65535
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
+    key0: {r: 0.9150943, g: 0.87334454, b: 0.55682623, a: 1}
+    key1: {r: 0.8490566, g: 0.73135537, b: 0.42052332, a: 1}
+    key2: {r: 0.5660378, g: 0.41960922, b: 0.27500895, a: 0}
+    key3: {r: 0.3962264, g: 0.30755618, b: 0.24483801, a: 0}
+    key4: {r: 0.41509432, g: 0.38452786, b: 0.21342114, a: 0}
+    key5: {r: 0.35737348, g: 0.4528302, b: 0.2798149, a: 0}
+    key6: {r: 0.26041293, g: 0.41509432, b: 0.30460763, a: 0}
+    key7: {r: 0.34919012, g: 0.4801454, b: 0.5566038, a: 0}
+    ctime0: 5590
+    ctime1: 13107
+    ctime2: 22937
+    ctime3: 26214
+    ctime4: 32768
+    ctime5: 45875
+    ctime6: 64880
+    ctime7: 65535
     atime0: 0
-    atime1: 48066
-    atime2: 65535
+    atime1: 65535
+    atime2: 0
     atime3: 0
     atime4: 0
     atime5: 0
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 4
-    m_NumAlphaKeys: 3
+    m_NumColorKeys: 8
+    m_NumAlphaKeys: 2
   _selectHeight: 0.2
   _desertCutoff: 0.2
+  _hydration: 1
+  _canvas: {fileID: 0}
+  _info: {fileID: 0}
 --- !u!33 &4127479567803207352
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -139,5 +142,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: -0.5, z: 0}
