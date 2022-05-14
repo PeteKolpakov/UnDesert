@@ -51,6 +51,10 @@ public class GroundTile : MonoBehaviour
 
     public void UpdateHidrationColor()
     {
+        if (_myState.Equals(TileState.desert))
+        {
+            _renderer.material.color = _moistureGradient.Evaluate(0);
+        }
         _renderer.material.color = _moistureGradient.Evaluate(_hydration);
     }
 

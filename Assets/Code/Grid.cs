@@ -96,7 +96,7 @@ public class Grid : MonoBehaviour
                     float mod = 1 - distanceToCenter / maxDist;
 
                     float noiseSample = GetNoiseSample(x, y);
-                    spawnedCube.SetHidration((noiseSample * mod) + _noiseBias);
+                    spawnedCube.SetHidration(((noiseSample + _noiseBias) * .5f) * mod);
 
                     //print((float)_noise2.Evaluate(x, y));
                     //print($"generated Ground at: {spawnedCube.GetName()}");
