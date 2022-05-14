@@ -1,6 +1,7 @@
 using Assets.Code;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GroundTile : MonoBehaviour
 {
@@ -26,8 +27,13 @@ public class GroundTile : MonoBehaviour
 
     private List<GroundTile> _myNeighbors;
 
-    private TileState _myState = TileState.soil;
-    private float _hydration = 1f;
+    [SerializeField]
+    private GameObject _canvas;
+    [SerializeField]
+    private Text _info;
+
+    private TileState _myState = TileState.Soil;
+    public float _hydration = 1f;
 
     public string GetName()
     {
@@ -51,7 +57,7 @@ public class GroundTile : MonoBehaviour
 
     public void UpdateHidrationColor()
     {
-        if (_myState.Equals(TileState.desert))
+        if (_myState.Equals(TileState.Desert))
         {
             _renderer.material.color = _moistureGradient.Evaluate(0);
         }
@@ -65,6 +71,9 @@ public class GroundTile : MonoBehaviour
         _generatedPos = transform.position; 
         _selectedPos = new Vector3(_generatedPos.x, _generatedPos.y + _selectHeight ,_generatedPos.z);
         _myNeighbors = new List<GroundTile>();
+
+        //_info = FindObjectOfType<TileInfo>();
+
     }
 
     public void SetNeighbors(List<GroundTile> targetList)
@@ -86,7 +95,7 @@ public class GroundTile : MonoBehaviour
         //CountdownTimer();   
         UpdateSelectedState();
         UpdateHidrationColor();
-        if (!_myState.Equals(TileState.water))
+        if (!_myState.Equals(TileState.Water))
         {
             CheckIfDry();
             UpdateTileState();
@@ -114,10 +123,10 @@ public class GroundTile : MonoBehaviour
         switch (CheckIfDry())
         {
             case true:
-                _myState = TileState.desert;
+                _myState = TileState.Desert;
                 break;
             case false:
-                _myState = TileState.soil;
+                _myState = TileState.Soil;
                 break;
         }
     }
@@ -137,16 +146,22 @@ public class GroundTile : MonoBehaviour
     {
         _isSelected = true;
         _isHovered = true;
+
+        _info.text = $"{ _hydration * 100:F0}%";
+        _canvas.SetActive(true);
+
     }
     private void OnMouseExit()
     {
         _isSelected = false;
         _isHovered = false;
+
+        _canvas.SetActive(false);
     }
     private void OnMouseDown()
     {
         _isSelected = false;
-        Debug.Log($"hidration level at {_name} is {_hydration} and state is {_myState}");
+        Debug.Log($"Coord: ({_name}) | Hydration Level: {_hydration * 100:F2}%  | Tile State: {_myState}");
 
     }
     private void OnMouseUp()
