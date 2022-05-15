@@ -424,7 +424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 97704365561295201, guid: 09e60c4eec1eb7648bc234c37e663956, type: 3}
       propertyPath: _noiseBias
-      value: 0.46
+      value: 0.42
       objectReference: {fileID: 0}
     - target: {fileID: 97704365561295203, guid: 09e60c4eec1eb7648bc234c37e663956, type: 3}
       propertyPath: m_Name

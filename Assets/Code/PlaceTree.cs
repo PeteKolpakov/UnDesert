@@ -33,11 +33,12 @@ public class PlaceTree : MonoBehaviour
         }
     }
 
-    public void PlantTree(Vector3 tilePos, Transform tile, float moistureLevel)
+    public TreeRequirements PlantTree(Vector3 tilePos, Transform tile, float moistureLevel)
     {
         if (_selected != null)
         {
-            minMoistureRequired = _selected.GetComponent<TreeRequirements>().minMoistRequired;
+            var TreeInfo = _selected.GetComponent<TreeRequirements>();
+            minMoistureRequired = TreeInfo.minMoistRequired;
 
 
             if (moistureLevel >= minMoistureRequired)
@@ -45,11 +46,16 @@ public class PlaceTree : MonoBehaviour
                 var tree = Instantiate(_selected, new Vector3(tilePos.x, tilePos.y + OffsetHeight, tilePos.z), Quaternion.Euler(0f, rotation[Random.Range(0, rotation.Length)], 0f), tile.transform);
                 allTrees.Add(new Vector2(tree.transform.position.x, tree.transform.position.z));
                 _selected = null;
+                return TreeInfo;
 
             }
-            else print("Invalid Tile");
-
+            else
+            {
+                print("Invalid Tile");
+                return null;
+            }
         }
+        return null;
     }
     public RaycastHit CastRay()
     {

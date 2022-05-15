@@ -26,7 +26,7 @@ public class MouseInteractionHandler : MonoBehaviour
                 {
                     if (!tree.allTrees.Contains(new Vector2(target.transform.position.x, target.transform.position.z)))
                     {
-                        tree.PlantTree(target.transform.position, target.transform, target._hydration);
+                        target.SetTree(tree.PlantTree(target.transform.position, target.transform, target._hydration));                      
                     }
                     else print("Tile Already Populated");
                 }

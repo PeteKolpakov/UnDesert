@@ -81,7 +81,8 @@ MonoBehaviour:
   _selectHeight: 0.2
   _desertCutoff: 0.2
   _hydration: 1
-  _hydrationSpeed: 1.81
+  _hydrationSpeed: 0.07
+  _myTree: {fileID: 0}
 --- !u!33 &4127479567803207352
 MeshFilter:
   m_ObjectHideFlags: 0
