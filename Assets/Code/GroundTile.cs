@@ -33,6 +33,9 @@ public class GroundTile : MonoBehaviour
 
     private HydrationInfo _moistInfo;
 
+    [SerializeField, Range(0.001f, 4f)]
+    private float _hydrationSpeed = .1f;
+
     public string GetName()
     {
         return _name;
@@ -103,6 +106,7 @@ public class GroundTile : MonoBehaviour
         }
         UpdateSelectedState();
         ResolveNeighbourInteraction();
+        UpdateHydration();
         UpdateHidrationColor();
     }
 
@@ -142,6 +146,22 @@ public class GroundTile : MonoBehaviour
     public TileState GetTileState()
     {
         return _iAmType;
+    }
+    private void UpdateHydration()
+    {
+        if (_hydrationState.Equals(HydrationState.stable))
+        {
+            return;
+        }
+
+        if (_hydrationState.Equals(HydrationState.up))
+        {
+            _hydration += _hydrationSpeed * Time.deltaTime;
+        }
+        if (_hydrationState.Equals(HydrationState.down))
+        {
+            _hydration -= _hydrationSpeed * Time.deltaTime;
+        }
     }
     private void ResolveNeighbourInteraction()
     {
