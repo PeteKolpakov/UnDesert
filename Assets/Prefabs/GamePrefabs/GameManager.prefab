@@ -53,7 +53,7 @@ MonoBehaviour:
   _gridContainer: {fileID: 97704366057856438}
   _heightScale: 0
   _groundHeightOffset: -6
-  _noiseBias: 0.89
+  _noiseBias: -1
 --- !u!114 &97704365561295202
 MonoBehaviour:
   m_ObjectHideFlags: 0

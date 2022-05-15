@@ -134,7 +134,7 @@ public class Grid : MonoBehaviour
         GroundTile centerTile;
         _worldMap.TryGetValue(new Vector2Int(_width / 2, _height / 2), out centerTile);
         centerTile.SetHidration(1f);
-        centerTile.SetState(TileState.water);
+        centerTile.SetTileState(TileState.Water);
     }
 
     private float GetNoiseSample(int x, int y)
