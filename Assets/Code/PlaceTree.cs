@@ -44,6 +44,7 @@ public class PlaceTree : MonoBehaviour
             {
                 var tree = Instantiate(_selected, new Vector3(tilePos.x, tilePos.y + OffsetHeight, tilePos.z), Quaternion.Euler(0f, rotation[Random.Range(0, rotation.Length)], 0f), tile.transform);
                 allTrees.Add(new Vector2(tree.transform.position.x, tree.transform.position.z));
+                _selected = null;
 
             }
             else print("Invalid Tile");

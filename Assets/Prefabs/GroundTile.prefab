@@ -80,8 +80,7 @@ MonoBehaviour:
   _selectHeight: 0.2
   _desertCutoff: 0.2
   _hydration: 1
-  _canvas: {fileID: 0}
-  _info: {fileID: 0}
+  _hydrationInfo: {fileID: 0}
 --- !u!33 &4127479567803207352
 MeshFilter:
   m_ObjectHideFlags: 0
